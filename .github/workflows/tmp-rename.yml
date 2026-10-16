@@ -12,6 +12,6 @@ jobs:
         run: |
           git config user.name "davidmeiselmanarchive"
           git config user.email "davidmeiselmanarchive@users.noreply.github.com"
-          git mv the-david-meiselman-archive.html index.html
+          git mv -f the-david-meiselman-archive.html index.html
           git commit -m "Daily archive sync 2026-10-15"
           git push
