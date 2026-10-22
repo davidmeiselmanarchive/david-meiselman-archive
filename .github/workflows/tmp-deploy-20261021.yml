@@ -1,0 +1,22 @@
+name: tmp-deploy-20261021
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download release asset
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release download site-deploy-2026-10-21 -p "the-david-meiselman-archive.html"
+      - name: Replace index.html and push
+        run: |
+          mv -f the-david-meiselman-archive.html index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Daily archive sync 2026-10-21"
+          git push
